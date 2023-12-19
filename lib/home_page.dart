@@ -10,26 +10,31 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  TextEditingController _textColntroller1 = TextEditingController();
-  TextEditingController _textColntroller2 = TextEditingController();
+  TextEditingController _textController1 = TextEditingController();
+  TextEditingController _textController2 = TextEditingController();
 
   bool widgetVisible = false;
   String text = '';
 
   void showWidget() {
     setState(() {
-      widgetVisible = true;
-      Random random = Random();
-      int randomNumber = random.nextInt(40) + 60;
-      text = randomNumber.toString();
+      if (_textController1.text.isNotEmpty &&
+          _textController2.text.isNotEmpty) {
+        widgetVisible = true;
+        Random random = Random();
+        int randomNumber = random.nextInt(40) + 60;
+        text = randomNumber.toString();
+      } else {
+        widgetVisible = false;
+      }
     });
   }
 
   void hideWidget() {
     setState(() {
       widgetVisible = false;
-      _textColntroller1.clear();
-      _textColntroller2.clear();
+      _textController1.clear();
+      _textController2.clear();
     });
   }
 
@@ -60,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     TextField(
                       style: TextStyle(color: Colors.white),
-                      controller: _textColntroller1,
+                      controller: _textController1,
                       decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
@@ -86,7 +91,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     TextField(
                       style: TextStyle(color: Colors.white),
-                      controller: _textColntroller2,
+                      controller: _textController2,
                       decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
